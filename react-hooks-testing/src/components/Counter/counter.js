@@ -22,7 +22,7 @@ class Counter extends Component {
   render() {
     return (
       <div>
-        <button className="counter-button" onClick={this.incremen}>
+        <button className="counter-button" onClick={this.increment}>
           Clicked: {this.state.count}
         </button>
       </div>
