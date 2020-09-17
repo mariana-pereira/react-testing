@@ -11,9 +11,7 @@ describe('Tests for App Container', () => {
   it('should have an initial value when first rendered', () => {
     render(
       <Provider store={createStore(counter)}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
+        <App />
       </Provider>
     )
     expect(screen.getByText('Counter: 0')).toBeInTheDocument()
@@ -22,9 +20,7 @@ describe('Tests for App Container', () => {
   it('should decrement counter when fire decrement click', () => {
     render(
       <Provider store={createStore(counter)}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
+        <App />
       </Provider>
     )
     fireEvent.click(screen.getByText('Decrement'))
@@ -40,9 +36,7 @@ describe('Tests for App Container', () => {
   it('should increment counter when fire increment click', () => {
     render(
       <Provider store={createStore(counter)}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
+        <App />
       </Provider>
     )
     fireEvent.click(screen.getByText('Increment'))
@@ -59,9 +53,7 @@ describe('Tests for App Container', () => {
     const store = createStore(counter)
     render(
       <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
+        <App />
       </Provider>
     )
     store.dispatch({ type: 'INCREMENT' })
@@ -72,9 +64,7 @@ describe('Tests for App Container', () => {
     const store = createStore(counter)
     render(
       <Provider store={store}>
-        <MemoryRouter>
-          <App />
-        </MemoryRouter>
+        <App />
       </Provider>
     )
     store.dispatch({ type: 'DECREMENT' })
