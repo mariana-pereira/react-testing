@@ -4,18 +4,22 @@ import React, { useState } from 'react';
 
 function TodoList() {
   const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('');
 
   function handleAddTask() {
-    setTasks([...tasks, 'make coffee']);
+    setTasks([...tasks, newTask]);
+    setNewTask('');
   }
 
   return (
-    <div>
+    <form data-testid="task-form" onSubmit={handleAddTask}>
       <ul data-testid="list">
         {tasks.map(task => <li key={task}>{task}</li>)}
       </ul>
+      <label htmlFor="task">Task</label>
+      <input id="task" value={newTask} onChange={e => setNewTask(e.target.value)} />
       <button onClick={handleAddTask}>Add</button>
-      </div>
+      </form>
   );
 }
 

@@ -5,12 +5,14 @@ import TodoList from '../../components/TodoList';
 
 describe('TodoList component', () => {
   it('should be able to add new task', () => {
-    const { getByText, getByTestId } = render(<TodoList />);
+    const { getByText, getByTestId, getByLabelText } = render(<TodoList />);
 
     //debug();
 
-    fireEvent.click(getByText('Add'));
+    fireEvent.change(getByLabelText('Task'), { target: { value: 'make coffee' } });
+    fireEvent.submit(getByTestId('task-form'));
 
     expect(getByTestId('list')).toContainElement(getByText('make coffee'));
+    expect(getByLabelText('Task')).toHaveValue('');
   });
 });
