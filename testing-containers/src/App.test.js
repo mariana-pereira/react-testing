@@ -1,73 +1,65 @@
 import React from 'react'
-import { createStore } from 'redux'
-import { MemoryRouter } from 'react-router'
-import { Provider } from 'react-redux'
 import { render, screen, fireEvent } from '@testing-library/react'
 
 import App from './App'
-import { counter } from './store'
 
 describe('Tests for App Container', () => {
   it('should have an initial value when first rendered', () => {
     render(
-      <Provider store={createStore(counter)}>
-        <App />
-      </Provider>
+      <App 
+        count={0}
+        increment={jest.fn()}
+        decrement={jest.fn()}
+      />
     )
     expect(screen.getByText('Counter: 0')).toBeInTheDocument()
   })
 
   it('should decrement counter when fire decrement click', () => {
+    const handleDecrement = jest.fn()
     render(
-      <Provider store={createStore(counter)}>
-        <App />
-      </Provider>
+      <App 
+        count={0}
+        increment={jest.fn()}
+        decrement={handleDecrement}
+      />
     )
     fireEvent.click(screen.getByText('Decrement'))
-    expect(screen.getByText('Counter: -1')).toBeInTheDocument()
-
-    fireEvent.click(screen.getByText('Decrement'))
-    expect(screen.getByText('Counter: -2')).toBeInTheDocument()
-
-    fireEvent.click(screen.getByText('Decrement'))
-    expect(screen.getByText('Counter: -3')).toBeInTheDocument()
+    expect(handleDecrement).toHaveBeenCalledTimes(1)
   })
 
   it('should increment counter when fire increment click', () => {
+    const handleIncrement = jest.fn()
     render(
-      <Provider store={createStore(counter)}>
-        <App />
-      </Provider>
+      <App 
+        count={0}
+        increment={handleIncrement}
+        decrement={jest.fn()}
+      />
     )
     fireEvent.click(screen.getByText('Increment'))
-    expect(screen.getByText('Counter: 1')).toBeInTheDocument()
-
-    fireEvent.click(screen.getByText('Increment'))
-    expect(screen.getByText('Counter: 2')).toBeInTheDocument()
-
-    fireEvent.click(screen.getByText('Increment'))
-    expect(screen.getByText('Counter: 3')).toBeInTheDocument()
+    expect(handleIncrement).toHaveBeenCalledTimes(1)
   })
 
   it('should render initial positive value', () => {
-    const store = createStore(counter)
     render(
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <App 
+        count={1}
+        increment={jest.fn()}
+        decrement={jest.fn()}
+      />
     )
-    store.dispatch({ type: 'INCREMENT' })
     expect(screen.getByText('Counter: 1')).toBeInTheDocument()
   })
 
   it('should render initial negative value', () => {
-    const store = createStore(counter)
     render(
-      <Provider store={store}>
-        <App />
-      </Provider>
+      <App 
+        count={-1}
+        increment={jest.fn()}
+        decrement={jest.fn()}
+      />
     )
-    store.dispatch({ type: 'DECREMENT' })
     expect(screen.getByText('Counter: -1')).toBeInTheDocument()
   })
 })

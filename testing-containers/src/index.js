@@ -4,7 +4,7 @@ import { Router, Switch, Route } from 'react-router'
 import { createBrowserHistory } from 'history'
 import { Provider } from 'react-redux'
 
-import App from './App'
+import App from './App.container'
 import { store } from './store'
 
 ReactDOM.render(
