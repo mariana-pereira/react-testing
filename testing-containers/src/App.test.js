@@ -1,20 +1,57 @@
 import React from 'react'
+import { createStore } from 'redux'
 import { MemoryRouter } from 'react-router'
 import { Provider } from 'react-redux'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 
 import App from './App'
-import { store } from './store'
+import { counter } from './store'
 
 describe('Tests for App Container', () => {
   it('should have an initial value when first rendered', () => {
     render(
-      <Provider store={store}>
+      <Provider store={createStore(counter)}>
         <MemoryRouter>
           <App />
         </MemoryRouter>
       </Provider>
     )
     expect(screen.getByText('Counter: 0')).toBeInTheDocument()
+  })
+
+  it('should decrement counter when fire decrement click', () => {
+    render(
+      <Provider store={createStore(counter)}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    )
+    fireEvent.click(screen.getByText('Decrement'))
+    expect(screen.getByText('Counter: -1')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByText('Decrement'))
+    expect(screen.getByText('Counter: -2')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByText('Decrement'))
+    expect(screen.getByText('Counter: -3')).toBeInTheDocument()
+  })
+
+  it('should increment counter when fire increment click', () => {
+    render(
+      <Provider store={createStore(counter)}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    )
+    fireEvent.click(screen.getByText('Increment'))
+    expect(screen.getByText('Counter: 1')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByText('Increment'))
+    expect(screen.getByText('Counter: 2')).toBeInTheDocument()
+
+    fireEvent.click(screen.getByText('Increment'))
+    expect(screen.getByText('Counter: 3')).toBeInTheDocument()
   })
 })
