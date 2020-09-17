@@ -54,4 +54,30 @@ describe('Tests for App Container', () => {
     fireEvent.click(screen.getByText('Increment'))
     expect(screen.getByText('Counter: 3')).toBeInTheDocument()
   })
+
+  it('should render initial positive value', () => {
+    const store = createStore(counter)
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    )
+    store.dispatch({ type: 'INCREMENT' })
+    expect(screen.getByText('Counter: 1')).toBeInTheDocument()
+  })
+
+  it('should render initial negative value', () => {
+    const store = createStore(counter)
+    render(
+      <Provider store={store}>
+        <MemoryRouter>
+          <App />
+        </MemoryRouter>
+      </Provider>
+    )
+    store.dispatch({ type: 'DECREMENT' })
+    expect(screen.getByText('Counter: -1')).toBeInTheDocument()
+  })
 })
