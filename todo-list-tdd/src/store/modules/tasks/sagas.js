@@ -7,6 +7,8 @@ export function* getTasks() {
   try {
     const response = yield call(api.get, 'tasks');
 
+    //console.log(response.data);
+
     yield put(getTasksSuccess(response.data));
   } catch (error) {
     yield put(getTasksFailure());
