@@ -11,7 +11,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
-    "react-scripts": "3.4.3",
+    "react-scripts": "3.4.0",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3"
   },
@@ -19,7 +19,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage --watchAll false",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/store/**/*.js",
+      "src/components/**/*.js"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -38,7 +45,6 @@
   },
   "devDependencies": {
     "@types/jest": "^26.0.14",
-    "axios-mock-adapter": "^1.18.2",
-    "jest-localstorage-mock": "^2.4.3"
+    "axios-mock-adapter": "^1.18.2"
   }
 }
