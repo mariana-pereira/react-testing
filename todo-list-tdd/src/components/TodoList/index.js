@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { addTask } from '../../store/modules/tasks/actions';
+
 // import { Container } from './styles';
 
 function TodoList() {
@@ -11,7 +13,7 @@ function TodoList() {
 
 
   function handleAddTask() {
-    dispatch({ type: 'ADD_TASK', payload: { task: newTask } });
+    dispatch(addTask(newTask));
     setNewTask('');
   }
 
