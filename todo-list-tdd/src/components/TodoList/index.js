@@ -1,25 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
 // import { Container } from './styles';
 
 function TodoList() {
-  const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState('');
 
-  useEffect(() => {
-    const tasks = localStorage.getItem('tasks');
+  const dispatch = useDispatch();
+  const tasks = useSelector(state => state.tasks);
 
-    if(tasks) {
-      setTasks(JSON.parse(tasks));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
 
   function handleAddTask() {
-    setTasks([...tasks, newTask]);
+    dispatch({ type: 'ADD_TASK', payload: { task: newTask } });
     setNewTask('');
   }
 
