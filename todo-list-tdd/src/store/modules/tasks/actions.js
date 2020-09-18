@@ -4,3 +4,16 @@ export function addTask(task) {
     payload: { task }
   }
 }
+
+export function getTasksSuccess(data) {
+  return {
+    type: 'GET_TASKS_SUCCESS',
+    payload: { data }
+  }
+}
+
+export function getTasksFailure() {
+  return {
+    type: 'GET_TASKS_FAILURE'
+  }
+}
