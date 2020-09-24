@@ -1,10 +1,12 @@
 import React from 'react';
+import Technologies from './pages/Technologies';
 
 function App() {
   return (
-    <div className="App">
-      
-    </div>
+    <>
+      <h1>Bem vindo ao Teste</h1>
+      <Technologies />
+    </>
   );
 }
 
