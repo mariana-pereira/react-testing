@@ -1,8 +1,9 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { render } from '@testing-library/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fireEvent, render } from '@testing-library/react';
 
 import RepositoryList from '../../components/RepositoryList';
+import { addNewRepository } from '../../store/modules/repositories/actions';
 
 jest.mock('react-redux');
 
@@ -16,5 +17,18 @@ describe('RepositoryList component', () => {
 
     expect(getByTestId('repository-list')).toContainElement(getByText('react-testing'));
     expect(getByTestId('repository-list')).toContainElement(getByText('node-testing'));
+  });
+
+  it('should be able to add new repository', () => {
+    const { getByTestId, getByText, getByLabelText } = render(<RepositoryList />);
+
+    const dispatch = jest.fn();
+
+    useDispatch.mockReturnValue(dispatch);
+
+    fireEvent.change(getByLabelText('Repository'), { target: { value: 'react-testing' } });
+    fireEvent.submit(getByTestId('repo-form'));
+
+    expect(dispatch).toHaveBeenCalledWith(addNewRepository('react-testing'));
   });
 });

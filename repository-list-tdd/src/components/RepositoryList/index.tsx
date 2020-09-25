@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { addNewRepository } from '../../store/modules/repositories/actions';
+
 // import { Container } from './styles';
 
 const RepositoryList: React.FC = () => {
@@ -10,7 +12,7 @@ const RepositoryList: React.FC = () => {
   const repositories = useSelector((state) => state.repositories);
 
   function handleAddRepository() {
-    dispatch({ type: 'ADD_NEW_REPOSITORY', payload: { repository: newRepository } });
+    dispatch(addNewRepository(newRepository));
     setNewRepository('');
   }
 
