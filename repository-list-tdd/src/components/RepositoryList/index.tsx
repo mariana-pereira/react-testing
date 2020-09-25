@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 // import { Container } from './styles';
 
 const RepositoryList: React.FC = () => {
   const [repositories, setRepositories] = useState<string[]>([]);
   const [newRepository, setNewRepository] = useState('');
+
+  useEffect(() => {
+    const repos = localStorage.getItem('@RepositoryList:repos');
+
+    if (repos) {
+      setRepositories(JSON.parse(repos));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('@RepositoryList:repos', JSON.stringify(repositories));
+  }, [repositories]);
 
   function handleAddRepository() {
     setRepositories([...repositories, 'react-testing']);
