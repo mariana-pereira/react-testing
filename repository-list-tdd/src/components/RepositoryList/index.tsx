@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 
 // import { Container } from './styles';
 
 const RepositoryList: React.FC = () => {
-  const [repositories, setRepositories] = useState<string[]>([]);
   const [newRepository, setNewRepository] = useState('');
 
-  useEffect(() => {
-    const repos = localStorage.getItem('@RepositoryList:repos');
-
-    if (repos) {
-      setRepositories(JSON.parse(repos));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem('@RepositoryList:repos', JSON.stringify(repositories));
-  }, [repositories]);
+  const dispatch = useDispatch();
+  const repositories = useSelector((state) => state.repositories);
 
   function handleAddRepository() {
-    setRepositories([...repositories, 'react-testing']);
+    dispatch({ type: 'ADD_NEW_REPOSITORY', payload: { repository: newRepository } });
     setNewRepository('');
   }
 
