@@ -34,7 +34,8 @@ module.exports = {
     '@typescript-eslint/explicit-member-accessibility': 'off',
     'react/prop-types': 0,
     'import/extensions': 'off',
-    'react/jsx-props-no-spreading': 'off'
+    'react/jsx-props-no-spreading': 'off',
+    'jsx-a11y/label-has-associated-control': 'off'
   },
   settings: {
     'import/parsers': {

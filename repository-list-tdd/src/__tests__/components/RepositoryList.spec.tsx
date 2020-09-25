@@ -5,10 +5,12 @@ import RepositoryList from '../../components/RepositoryList';
 
 describe('RepositoryList component', () => {
   it('should be able to add new repository', () => {
-    const { getByText, getByTestId } = render(<RepositoryList />);
+    const { getByText, getByTestId, getByLabelText } = render(<RepositoryList />);
 
-    fireEvent.click(getByText('Add'));
+    fireEvent.change(getByLabelText('Repository'), { target: { value: 'react-testing' } });
+    fireEvent.submit(getByTestId('repo-form'));
 
     expect(getByTestId('repository-list')).toContainElement(getByText('react-testing'));
+    expect(getByLabelText('Repository')).toHaveValue('');
   });
 });

@@ -4,18 +4,27 @@ import React, { useState } from 'react';
 
 const RepositoryList: React.FC = () => {
   const [repositories, setRepositories] = useState<string[]>([]);
+  const [newRepository, setNewRepository] = useState('');
 
   function handleAddRepository() {
     setRepositories([...repositories, 'react-testing']);
+    setNewRepository('');
   }
 
   return (
-    <div>
+    <form data-testid="repo-form" onSubmit={handleAddRepository}>
       <ul data-testid="repository-list">
         {repositories.map((repository) => <li key={repository}>{repository}</li>)}
       </ul>
-      <button type="button" onClick={handleAddRepository}>Add</button>
-    </div>
+
+      <label htmlFor="repository">Repository</label>
+      <input
+        id="repository"
+        value={newRepository}
+        onChange={(e) => setNewRepository(e.target.value)}
+      />
+      <button type="submit">Add</button>
+    </form>
   );
 };
 
