@@ -15,7 +15,7 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",
-    "react-scripts": "3.4.1",
+    "react-scripts": "3.4.0",
     "redux": "^4.0.5",
     "redux-saga": "^1.1.3",
     "typescript": "~3.7.2"
@@ -24,7 +24,14 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage --watchAll false",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/store/**/*.ts",
+      "src/components/**/*.tsx"
+    ]
   },
   "eslintConfig": {
     "extends": "react-app"
